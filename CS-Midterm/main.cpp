@@ -9,7 +9,7 @@ int main() {
 		std::cout << "STORE MAIN MENU (Please select from the following options):" << std::endl;
 		std::cout << "1) Add an item to your cart" << std::endl;
 		std::cout << "2) View your current cart" << std::endl;
-		std::cout << "3) View all items" << std::endl;
+		std::cout << "3) View our item stock" << std::endl;
 		std::cout << "4) Check out" << std::endl;
 		std::cout << "5) Exit store" << std::endl;
 
