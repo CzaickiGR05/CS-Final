@@ -1,16 +1,44 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <vector>
 
-void addItem() {
-	for (int i = 1; i == 8; i++) {
-		std::cout << i << ") " << itemNames[i - 1] << " ($" << itemPrices[i - 1] << ")" << " - Stock: " << itemStock << std::endl;
+void listItems(std::string names[], double prices[], int stock[]) {
+
+	std::cout << "Available Stock: " << std::endl;
+
+	for (int i = 1; i <= 8; i++) {
+		std::cout << i << ") " << names[i - 1] << " ($" << prices[i - 1] << ")" << " - Stock: " << stock[i - 1] << std::endl;
+	}
+
+	std::cout << std::endl;
+}
+
+void listCart(std::vector<std::string> cart, std::string names[], double prices[], int input) {
+
+	double total = 0;
+
+	for (std::string item : cart) {
+		std::cout << item;
+		for (int i = 0; i < 8; i++) {
+			if (item == names[i]) {
+				std::cout << " ($" << prices[i] << ")" << std::endl;
+				if (input == 4) {
+					total += prices[i];
+				}
+			}
+		}
+		
+	}
+
+	if (input == 4) {
+		std::cout << "TOTAL: $" << total << std::endl;
 	}
 }
 
 int main() {
 
-	std::cout << std::setprecision(2);
+	std::cout << std::fixed << std::setprecision(2);
 
 	int input = 0;
 
@@ -24,6 +52,8 @@ int main() {
 	998.99, 69.99, 0.99 };
 
 	int itemStock[8] = { 5, 10, 7, 2, 1, 1, 6, 2000 };
+
+	std::vector<std::string> userCart;
 
 	while (input != 5) {
 		std::cout << "STORE MAIN MENU (Please select from the following options):" << std::endl;
@@ -43,9 +73,51 @@ int main() {
 			input = std::stoi(temp);
 		}
 		catch (std::exception&) {
-			std::cout << "Error: Please enter a number." << std::endl;
+			std::cout << "Error: Please enter a valid number." << std::endl;
 			return 1;
 		}
+
+		std::cout << std::endl;
+
+		if (input == 1) {
+
+			listItems(itemNames, itemPrices, itemStock);
+
+			std::cout << "Please enter the name of the item you would like to add to your cart EXACTLY as it is seen in the list above: ";
+			std::getline(std::cin, temp);
+
+			for (int i = 0; i < 8; i++) {
+				if (temp == itemNames[i]) {
+					if (itemStock[i] > 0) {
+						std::cout << itemNames[i] << " has been added to your cart!" << std::endl;
+						userCart.push_back(itemNames[i]);
+						itemStock[i]--;
+					}
+					else {
+						std::cout << "Sorry that item is out of stock!" << std::endl;
+					}
+				}
+			}
+
+			std::cout << std::endl;
+		}
+
+		if (input == 2) {
+			listCart(userCart, itemNames, itemPrices, input);
+			std::cout << std::endl;
+		}
+
+		if (input == 3) {
+			listItems(itemNames, itemPrices, itemStock);
+		}
+
+		if (input == 4) {
+			std::cout << "Thank you for shopping with us!" << std::endl;
+			std::cout << "YOUR RECIEPT:" << std::endl;
+			listCart(userCart, itemNames, itemPrices, input);
+			input = 5;
+		}
+
 	}
 
 	std::cout << std::endl;
