@@ -2,6 +2,12 @@
 #include <string>
 #include <iomanip>
 
+void addItem() {
+	for (int i = 1; i == 8; i++) {
+		std::cout << i << ") " << itemNames[i - 1] << " ($" << itemPrices[i - 1] << ")" << " - Stock: " << itemStock << std::endl;
+	}
+}
+
 int main() {
 
 	std::cout << std::setprecision(2);
