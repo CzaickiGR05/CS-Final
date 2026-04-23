@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <vector>
 
+// Strech Goals Implemented: 1(vector cart)
+
 void listItems(std::string names[], double prices[], int stock[]) {
 
 	std::cout << "Available Stock: " << std::endl;
