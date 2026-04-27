@@ -21,7 +21,6 @@ void item::addItem() {
 
 }
 
-
 int exit() {
 	return 0;
 }
@@ -46,7 +45,7 @@ void readInventory() {
 	file.open("inventory.txt");
 	if (file.is_open()) {
 
-		while(std::getline(file, line)) {
+		while (std::getline(file, line)) {
 			std::cout << line << std::endl;
 		}
 		file.close();
@@ -57,6 +56,7 @@ void readInventory() {
 
 }
 
+
 int main() {
 	int options = 0;
 	std::string input;
@@ -65,15 +65,13 @@ int main() {
 	try {
 		options = std::stoi(input);
 	}
-	catch (std::exception& e) {
+	catch(std::exception& e){
 		throw std::exception("Input must be an integer between 1 and 5");
 	}
 
 	if (options == 5) {
 		exit();
 	}
-
-
 
 	return 0;
 }
