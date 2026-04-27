@@ -40,9 +40,8 @@ void writeReceipt() {
 	}
 }
 
-void readFile() {
+void readInventory() {
 	std::string line;
-
 	std::ifstream file;
 	file.open("inventory.txt");
 	if (file.is_open()) {
