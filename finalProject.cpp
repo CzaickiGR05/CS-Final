@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iomanip>
 
-#include "finalProj_items.h"
+#include "items.h"
 
 void checkout() {
 
@@ -26,6 +26,20 @@ int exit() {
 	return 0;
 }
 
+void writeReceipt() {
+
+	std::ofstream file;
+	file.open("Receipt");
+
+	if (file.is_open()) {
+		file << "Contains" << std::endl;
+		file.close();
+	}
+	else {
+		std::cout << "file not opened" << std::endl;
+	}
+}
+
 int main() {
 	int options = 0;
 	std::string input;
@@ -34,27 +48,13 @@ int main() {
 	try {
 		options = std::stoi(input);
 	}
-	catch(std::exception& e){
+	catch (std::exception& e) {
 		throw std::exception("Input must be an integer between 1 and 5");
 	}
 
 	if (options == 5) {
 		exit();
 	}
-
-
-void writeReceipt() {
-	std::ofstream receiptFile;
-	file2.open("Receipt");
-
-	if (file2.is_open()) {
-		file2 << "Contains" << std::endl;
-		file2.close();
-	}
-	else {
-		std::cout << "file not opened" << std::endl;
-	}
-}
 
 
 
