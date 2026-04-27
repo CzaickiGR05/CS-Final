@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <vector>
 
-// Strech Goals Implemented: 1(vector cart)
+// Strech Goals Implemented: 1(vector cart), 10(Malicious Input)
 
 void listItems(std::string names[], double prices[], int stock[]) {
 
@@ -73,17 +73,23 @@ int main() {
 		std::getline(std::cin, temp);
 		try {
 			input = std::stoi(temp);
+			if (input < 1 || input > 5) {
+				std::cout << std::endl;
+				std::cout << "Please enter a valid input." << std::endl;
+				std::cout << std::endl;
+			}
 		}
 		catch (std::exception&) {
-			std::cout << "Error: Please enter a valid number." << std::endl;
-			return 1;
+			std::cout << std::endl;
+			std::cout << "Please enter a valid input." << std::endl;
+			std::cout << std::endl;
 		}
-
-		std::cout << std::endl;
 
 		if (input == 1) {
 
 			listItems(itemNames, itemPrices, itemStock);
+
+			bool valid = false;
 
 			std::cout << "Please enter the name of the item you would like to add to your cart EXACTLY as it is seen in the list above: ";
 			std::getline(std::cin, temp);
@@ -94,30 +100,50 @@ int main() {
 						std::cout << itemNames[i] << " has been added to your cart!" << std::endl;
 						userCart.push_back(itemNames[i]);
 						itemStock[i]--;
+						valid = true;
 					}
 					else {
+						std::cout << std::endl;
 						std::cout << "Sorry that item is out of stock!" << std::endl;
+						valid = true;
 					}
 				}
+			}
+
+			if (valid == false) {
+				std::cout << std::endl;
+				std::cout << "Please enter a valid item." << std::endl;
 			}
 
 			std::cout << std::endl;
 		}
 
-		if (input == 2) {
+		else if (input == 2) {
+			if (userCart.empty()) {
+				std::cout << "Your cart is empty. Please add at least one item to your cart before using this feature." << std::endl;
+			}
 			listCart(userCart, itemNames, itemPrices, input);
 			std::cout << std::endl;
 		}
 
-		if (input == 3) {
+		else if (input == 3) {
 			listItems(itemNames, itemPrices, itemStock);
 		}
 
-		if (input == 4) {
-			std::cout << "Thank you for shopping with us!" << std::endl;
-			std::cout << "YOUR RECIEPT:" << std::endl;
-			listCart(userCart, itemNames, itemPrices, input);
-			input = 5;
+		else if (input == 4) {
+			if (!userCart.empty()) {
+				std::cout << std::endl;
+				std::cout << "Thank you for shopping with us!" << std::endl;
+				std::cout << std::endl;
+				std::cout << "YOUR RECIEPT:" << std::endl;
+				listCart(userCart, itemNames, itemPrices, input);
+				input = 5;
+			}
+			else {
+				std::cout << std::endl;
+				std::cout << "Please add some of our items to your cart before checking out!" << std::endl;
+				std::cout << std::endl;
+			}
 		}
 
 	}
