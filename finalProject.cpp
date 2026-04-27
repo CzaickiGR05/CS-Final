@@ -29,7 +29,7 @@ int exit() {
 void writeReceipt() {
 
 	std::ofstream file;
-	file.open("Receipt");
+	file.open("Receipt.txt");
 
 	if (file.is_open()) {
 		file << "Contains" << std::endl;
@@ -38,6 +38,24 @@ void writeReceipt() {
 	else {
 		std::cout << "file not opened" << std::endl;
 	}
+}
+
+void readFile() {
+	std::string line;
+
+	std::ifstream file;
+	file.open("inventory.txt");
+	if (file.is_open()) {
+
+		while(std::getline(file, line)) {
+			std::cout << line << std::endl;
+		}
+		file.close();
+	}
+	else {
+		std::cout << "file not opened" << std::endl;
+	}
+
 }
 
 int main() {
