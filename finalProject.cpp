@@ -43,7 +43,18 @@ int main() {
 	}
 
 
+void writeReceipt() {
+	std::ofstream receiptFile;
+	file2.open("Receipt");
 
+	if (file2.is_open()) {
+		file2 << "Contains" << std::endl;
+		file2.close();
+	}
+	else {
+		std::cout << "file not opened" << std::endl;
+	}
+}
 
 
 
